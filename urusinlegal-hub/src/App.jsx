@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Users,
   Target,
@@ -18,14 +18,10 @@ const atmVideos = [
   {
     id: 1,
     title: "Kelebihan PT Perorangan",
-    caption: "Waduh, bikin PT Perorangan buat bisnis, untungnya bisa sebanyak ini ya?😲 Asalkan kamu gak mengurusnya sendirian. Karena masih harus belajar sistem pemerintah. Waktunya lama dan prosesnya ribet...",
+    caption: "Mau punya PT Perorangan, banyak yang diurus kan?\n\nIni bisa nguras waktu tenagamu. Belum lagi kalau sistemnya eror. Dan, dokumen legalitas yang kamu dapet jadi gak lengkap.😩\n\nMakanya, urus di Legal MP aja. Bisa selesai dalam 1-2 hari aja.✅\n\nFasilitas yang kamu dapat:\n- SK Kemenkumham\n- Pernyataan Pendirian Kemenkumham\n- e-NPWP + SKT Pajak\n- Akun OSS RBA\n- NIB (TDP, SIUP, SKU)\n- Sertifikat Standar\n- Pernyataan UMK terkait Tata Ruang\n- SPPL + dll\n- GRATIS 1X Konsultasi Digital Marketing\n- Stempel Perusahaan\n- Dokumen Fisik\n- Desain Template Dokumen Perusahaan\n\nBONUS Pembukaan Rekening atas nama PT\nFREE AKSES Gabung Komunitas Pengusaha Indonesia\n\n👉Klik Tombol Selengkapnya untuk Konsultasi GRATIS!",
     type: "Soft Selling",
     category: "Edukasi & Niche",
     hook: "Fakta Mengejutkan (Surprising Fact) & Agitasi Masalah",
-    // CARA PENGGUNAAN: 
-    // 1. Download video mp4 dari FB Ads
-    // 2. Letakkan file di dalam folder "public" (cth: public/legal-pengaruh-1.mp4)
-    // 3. Tulis namanya di bawah ini seperti "/legal-pengaruh-1.mp4"
     videoUrl: "/legal-pengaruh-1.mp4"
   },
   {
@@ -35,7 +31,7 @@ const atmVideos = [
     type: "Hard Selling",
     category: "Promo",
     hook: "Penawaran harga langsung (Direct Offer)",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    videoUrl: "/Galeri Iklan (5).mp4"
   },
   {
     id: 3,
@@ -44,7 +40,7 @@ const atmVideos = [
     type: "Soft Selling",
     category: "Tutorial",
     hook: "Menyelesaikan masalah audiens (Problem Solving)",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    videoUrl: "Galeri Iklan (4).mp4"
   },
   {
     id: 4,
@@ -53,7 +49,61 @@ const atmVideos = [
     type: "Soft Selling",
     category: "Social Proof",
     hook: "Bukti nyata kredibilitas (Trust Building)",
-    videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+    videoUrl: "Galeri Iklan (3).mp4"
+  },
+  {
+    id: 5,
+    title: "Testimoni Klien PT Sukses",
+    caption: "Alhamdulillah satu lagi klien urusinlegal.com yang puas dengan layanan pendirian PT kami. Sukses terus untuk bisnisnya kak!",
+    type: "Soft Selling",
+    category: "Social Proof",
+    hook: "Bukti nyata kredibilitas (Trust Building)",
+    videoUrl: "Galeri Iklan (2).mp4"
+  },
+  {
+    id: 6,
+    title: "Testimoni Klien PT Sukses",
+    caption: "Alhamdulillah satu lagi klien urusinlegal.com yang puas dengan layanan pendirian PT kami. Sukses terus untuk bisnisnya kak!",
+    type: "Soft Selling",
+    category: "Social Proof",
+    hook: "Bukti nyata kredibilitas (Trust Building)",
+    videoUrl: "Galeri Iklan (1).mp4"
+  },
+  {
+    id: 7,
+    title: "Testimoni Klien PT Sukses",
+    caption: "Alhamdulillah satu lagi klien urusinlegal.com yang puas dengan layanan pendirian PT kami. Sukses terus untuk bisnisnya kak!",
+    type: "Soft Selling",
+    category: "Social Proof",
+    hook: "Bukti nyata kredibilitas (Trust Building)",
+    videoUrl: "Galeri Iklan.mp4"
+  },
+  {
+    id: 8,
+    title: "Testimoni Klien PT Sukses",
+    caption: "Alhamdulillah satu lagi klien urusinlegal.com yang puas dengan layanan pendirian PT kami. Sukses terus untuk bisnisnya kak!",
+    type: "Soft Selling",
+    category: "Social Proof",
+    hook: "Bukti nyata kredibilitas (Trust Building)",
+    videoUrl: "Ad Library (2).mp4"
+  },
+  {
+    id: 9,
+    title: "Testimoni Klien PT Sukses",
+    caption: "Alhamdulillah satu lagi klien urusinlegal.com yang puas dengan layanan pendirian PT kami. Sukses terus untuk bisnisnya kak!",
+    type: "Soft Selling",
+    category: "Social Proof",
+    hook: "Bukti nyata kredibilitas (Trust Building)",
+    videoUrl: "Ad Library (1).mp4"
+  },
+  {
+    id: 10,
+    title: "Testimoni Klien PT Sukses",
+    caption: "Alhamdulillah satu lagi klien urusinlegal.com yang puas dengan layanan pendirian PT kami. Sukses terus untuk bisnisnya kak!",
+    type: "Soft Selling",
+    category: "Social Proof",
+    hook: "Bukti nyata kredibilitas (Trust Building)",
+    videoUrl: "Ad Library.mp4"
   }
 ];
 
@@ -104,15 +154,21 @@ export default function App() {
       </nav>
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {renderContent()}
-      </main>
+      {activeTab === 'atm' ? (
+        <main>{renderContent()}</main>
+      ) : (
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {renderContent()}
+        </main>
+      )}
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-slate-400 py-6 text-center text-sm mt-auto">
-        <p>Internal Document &bull; UrusinLegal.com &bull; {new Date().getFullYear()}</p>
-        <p className="mt-1">Built for Traffic, SEO, and Engagement.</p>
-      </footer>
+      {activeTab !== 'atm' && (
+        <footer className="bg-slate-900 text-slate-400 py-6 text-center text-sm mt-auto">
+          <p>Internal Document &bull; UrusinLegal.com &bull; {new Date().getFullYear()}</p>
+          <p className="mt-1">Built for Traffic, SEO, and Engagement.</p>
+        </footer>
+      )}
     </div>
   );
 }
@@ -282,73 +338,105 @@ const ContentStrategy = () => (
   </div>
 );
 
-const AtmGallery = () => (
-  <div className="space-y-6 animate-fade-in">
-    <div className="mb-6 flex flex-col md:flex-row md:items-end justify-between border-b pb-4 gap-4">
-      <div>
-        <h2 className="text-3xl font-bold text-slate-900">Galeri ATM (FB Ads Library)</h2>
-        <p className="text-slate-500 mt-2">Kumpulan referensi iklan kompetitor. Kita amati hook dan captionnya.</p>
-      </div>
-      <a
-        href="https://web.facebook.com/ads/library/?active_status=active&ad_type=all&country=ID&q=Legal%20Menjadi%20Pengaruh"
-        target="_blank"
-        rel="noreferrer"
-        className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors font-medium text-sm"
-      >
-        <ExternalLink className="w-4 h-4 mr-2" />
-        Buka FB Ads Library Asli
-      </a>
-    </div>
+const AtmVideoItem = ({ video }) => {
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6">
-      {atmVideos.map((video) => (
-        <div key={video.id} className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.6
+    };
 
-          {/* Video Player Asli / Iframe */}
-          <div className="bg-slate-900 aspect-video relative flex items-center justify-center overflow-hidden">
-            {video.videoUrl.includes('youtube.com') || video.videoUrl.includes('youtu.be') ? (
-              <iframe
-                className="w-full h-full"
-                src={video.videoUrl}
-                title={video.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            ) : (
-              <video
-                className="w-full h-full object-contain bg-black"
-                controls
-                preload="metadata"
-                poster={`https://via.placeholder.com/640x360.png?text=${encodeURIComponent(video.title)}`}
-              >
-                <source src={video.videoUrl} type="video/mp4" />
-                Maaf, pelayar web anda tidak menyokong pemutaran video ini.
-              </video>
-            )}
-            <span className={`absolute top-4 right-4 px-2 py-1 text-xs font-bold rounded z-10 shadow-md ${video.type === 'Hard Selling' ? 'bg-pink-500 text-white' : 'bg-emerald-500 text-white'}`}>
-              {video.type}
-            </span>
-          </div>
+    const handleIntersection = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (videoRef.current) {
+            videoRef.current.play().then(() => setIsPlaying(true)).catch(error => {
+              console.log("Autoplay prevented:", error);
+              setIsPlaying(false);
+            });
+          }
+        } else {
+          if (videoRef.current) {
+            videoRef.current.pause();
+            setIsPlaying(false);
+          }
+        }
+      });
+    };
 
-          <div className="p-5 flex-1 flex flex-col">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded">{video.category}</span>
+    const observer = new IntersectionObserver(handleIntersection, options);
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => {
+      if (videoRef.current) {
+        observer.unobserve(videoRef.current);
+      }
+    };
+  }, []);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play();
+        setIsPlaying(true);
+      } else {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      }
+    }
+  };
+
+  return (
+    <div
+      className="w-full relative flex items-center justify-center bg-black snap-start snap-always"
+      style={{ height: '100%' }}
+    >
+      {video.videoUrl.includes('youtube.com') || video.videoUrl.includes('youtu.be') ? (
+        <iframe
+          className="w-full h-full border-none"
+          src={video.videoUrl}
+          title={video.title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      ) : (
+        <div className="w-full h-full relative cursor-pointer" onClick={togglePlay}>
+          <video
+            ref={videoRef}
+            className="w-full h-full object-cover md:object-contain block"
+            loop
+            playsInline
+            preload="metadata"
+          >
+            <source src={video.videoUrl} type="video/mp4" />
+          </video>
+          {/* Custom Play Button Overlay */}
+          {!isPlaying && (
+            <div className="absolute inset-0 flex items-center justify-center transition-opacity bg-black/10">
+               <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md">
+                 <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-1"></div>
+               </div>
             </div>
-
-            <p className="text-slate-600 text-sm mb-4 italic">"{video.caption}"</p>
-
-            <div className="mt-auto pt-4 border-t border-slate-100">
-              <p className="text-xs text-slate-400 uppercase font-semibold mb-1">🔥 Hook yang dipakai:</p>
-              <p className="text-sm font-medium text-slate-800">{video.hook}</p>
-            </div>
-          </div>
+          )}
         </div>
-      ))}
+      )}
     </div>
+  );
+};
 
-    <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 text-sm text-blue-800">
-      <strong>Panduan Teknikal:</strong> Untuk menambah video baru, download video mp4 dari Facebook Ads, letakkan dalam folder <code className="bg-blue-200 px-1 rounded">public</code> projek anda, dan daftarkan nama fail tersebut pada data <code className="bg-blue-200 px-1 rounded">atmVideos</code> di bahagian atas kod sumber (source code).
-    </div>
+const AtmGallery = () => (
+  <div
+    className="h-[calc(100dvh-116px)] md:h-[calc(100dvh-64px)] overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-black"
+  >
+    {atmVideos.map((video) => (
+      <AtmVideoItem key={video.id} video={video} />
+    ))}
   </div>
 );
 
