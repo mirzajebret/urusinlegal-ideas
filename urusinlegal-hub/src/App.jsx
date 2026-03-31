@@ -4,13 +4,9 @@ import {
   Target,
   BookOpen,
   PlaySquare,
-  Briefcase,
-  Camera,
-  Code,
   CheckCircle2,
   Lightbulb,
   TrendingUp,
-  ExternalLink
 } from 'lucide-react';
 
 // --- DATA MOCKUP UNTUK ATM (Bisa diganti dengan data asli dari FB Ads) ---
@@ -132,8 +128,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <Briefcase className="h-8 w-8 mr-3 text-blue-300" />
-              <span className="font-bold text-xl tracking-tight">UrusinLegal<span className="text-blue-300"></span></span>
+              <span className="font-bold text-xl tracking-tight">UrusinLegal.com<span className="text-blue-300"></span></span>
             </div>
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-1 items-center">
@@ -165,8 +160,8 @@ export default function App() {
       {/* Footer */}
       {activeTab !== 'atm' && (
         <footer className="bg-slate-900 text-slate-400 py-6 text-center text-sm mt-auto">
-          <p>Internal Document &bull; UrusinLegal.com &bull; {new Date().getFullYear()}</p>
-          <p className="mt-1">Built for Traffic, SEO, and Engagement.</p>
+          <p>UrusinLegal.com &bull; {new Date().getFullYear()}</p>
+          <p className="mt-1"></p>
         </footer>
       )}
     </div>
@@ -177,45 +172,66 @@ export default function App() {
 
 const Dashboard = () => (
   <div className="space-y-8 animate-fade-in">
-    <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 text-center">
-      <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
-        Kickoff Meeting: <span className="text-blue-600">Sosial Media & SEO</span>
+    <div className="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-100 text-center relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-emerald-500"></div>
+      <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">
+        Kickoff Meeting: <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Sosial Media & SEO</span>
       </h1>
-      <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+      <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+        Selamat datang di <strong>Central Hub UrusinLegal.com</strong>. Agenda utama kita adalah menyelaraskan strategi konten sosial media dengan optimasi SEO website. Tujuannya satu: mendominasi keyword legalitas usaha dan menghasilkan lead berkualitas tinggi! 🚀
       </p>
     </div>
 
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div className="bg-blue-50 p-6 rounded-xl border border-blue-100">
-        <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mb-4 text-blue-600">
-          <TrendingUp className="w-6 h-6" />
+      <div className="bg-white p-6 rounded-xl border border-blue-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+        <div className="absolute top-0 right-0 w-24 h-24 bg-blue-50 rounded-bl-full -z-10 group-hover:scale-110 transition-transform"></div>
+        <div className="bg-blue-100 w-14 h-14 rounded-2xl flex items-center justify-center mb-5 text-blue-600 shadow-inner">
+          <TrendingUp className="w-7 h-7" />
         </div>
-        <h3 className="text-xl font-bold mb-2">1. Traffic & SEO</h3>
-        <p className="text-slate-600">Meningkatkan kunjungan organik ke urusinlegal.com melalui konten yang dicari audiens (Keyword targeting).</p>
+        <h3 className="text-xl font-bold mb-3 text-slate-800">1. Traffic & SEO</h3>
+        <p className="text-slate-600 mb-4">Meningkatkan kunjungan organik ke urusinlegal.com melalui konten yang dicari audiens.</p>
+        <ul className="text-sm text-slate-500 space-y-2">
+          <li className="flex items-center"><CheckCircle2 className="w-4 h-4 text-blue-500 mr-2" /> Riset Keyword Long-tail</li>
+          <li className="flex items-center"><CheckCircle2 className="w-4 h-4 text-blue-500 mr-2" /> Optimasi Kecepatan Web</li>
+        </ul>
       </div>
-      <div className="bg-indigo-50 p-6 rounded-xl border border-indigo-100">
-        <div className="bg-indigo-100 w-12 h-12 rounded-full flex items-center justify-center mb-4 text-indigo-600">
-          <Users className="w-6 h-6" />
+
+      <div className="bg-white p-6 rounded-xl border border-indigo-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+        <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-50 rounded-bl-full -z-10 group-hover:scale-110 transition-transform"></div>
+        <div className="bg-indigo-100 w-14 h-14 rounded-2xl flex items-center justify-center mb-5 text-indigo-600 shadow-inner">
+          <Users className="w-7 h-7" />
         </div>
-        <h3 className="text-xl font-bold mb-2">2. Engagement</h3>
-        <p className="text-slate-600">Membangun interaksi, edukasi, dan trust agar audiens merasa butuh dan percaya dengan jasa kita.</p>
+        <h3 className="text-xl font-bold mb-3 text-slate-800">2. Engagement</h3>
+        <p className="text-slate-600 mb-4">Membangun interaksi, edukasi, dan trust agar audiens yakin dengan jasa legalitas kita.</p>
+        <ul className="text-sm text-slate-500 space-y-2">
+          <li className="flex items-center"><CheckCircle2 className="w-4 h-4 text-indigo-500 mr-2" /> Video Edukasi Menarik</li>
+          <li className="flex items-center"><CheckCircle2 className="w-4 h-4 text-indigo-500 mr-2" /> Interaksi Komen & DM Cepat</li>
+        </ul>
       </div>
-      <div className="bg-emerald-50 p-6 rounded-xl border border-emerald-100">
-        <div className="bg-emerald-100 w-12 h-12 rounded-full flex items-center justify-center mb-4 text-emerald-600">
-          <Lightbulb className="w-6 h-6" />
+
+      <div className="bg-white p-6 rounded-xl border border-emerald-100 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+        <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-bl-full -z-10 group-hover:scale-110 transition-transform"></div>
+        <div className="bg-emerald-100 w-14 h-14 rounded-2xl flex items-center justify-center mb-5 text-emerald-600 shadow-inner">
+          <Lightbulb className="w-7 h-7" />
         </div>
-        <h3 className="text-xl font-bold mb-2">3. Strategi ATM</h3>
-        <p className="text-slate-600">Membedah konten FB/IG Ads & Tiktok kompetitor. Kita liat apa yang works, lalu kita buat versi lebih baiknya.</p>
+        <h3 className="text-xl font-bold mb-3 text-slate-800">3. Strategi ATM</h3>
+        <p className="text-slate-600 mb-4">Membedah konten FB/IG Ads kompetitor. Amati apa yang works, modifikasi jadi lebih baik.</p>
+        <ul className="text-sm text-slate-500 space-y-2">
+          <li className="flex items-center"><CheckCircle2 className="w-4 h-4 text-emerald-500 mr-2" /> Analisa Hook & Angle</li>
+          <li className="flex items-center"><CheckCircle2 className="w-4 h-4 text-emerald-500 mr-2" /> Modifikasi Call-to-Action</li>
+        </ul>
       </div>
     </div>
+
+
   </div>
 );
 
 const TeamRoles = () => (
   <div className="space-y-6 animate-fade-in">
     <div className="mb-8 border-b pb-4">
-      <h2 className="text-3xl font-bold text-slate-900">Role</h2>
-      <p className="text-slate-500 mt-2"></p>
+      <h2 className="text-3xl font-bold text-slate-900">Pembagian Peran (Role)</h2>
+      <p className="text-slate-500 mt-2 text-lg">Kolaborasi tim yang solid adalah kunci keberhasilan. Berikut rincian fokus dan tanggung jawab agar strategi dapat tereksekusi dengan maksimal.</p>
     </div>
 
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -227,8 +243,8 @@ const TeamRoles = () => (
           </div>
         </div>
         <div className="pt-14 p-6">
-          <h3 className="text-2xl font-bold text-slate-900">Mas IT</h3>
-          <p className="text-blue-600 font-medium mb-4">Tech, SEO & Analytics</p>
+          <h3 className="text-2xl font-bold text-slate-900">Mirza</h3>
+          <p className="text-blue-600 font-medium mb-4">Website, SEO & Analytics</p>
           <ul className="space-y-2 text-sm text-slate-600">
             <li className="flex items-start"><CheckCircle2 className="w-4 h-4 text-emerald-500 mr-2 mt-0.5 shrink-0" /> Riset keyword dan struktur SEO web.</li>
             <li className="flex items-start"><CheckCircle2 className="w-4 h-4 text-emerald-500 mr-2 mt-0.5 shrink-0" /> Optimasi kecepatan dan UI/UX urusinlegal.com.</li>
@@ -239,16 +255,16 @@ const TeamRoles = () => (
 
       {/* Content Creator */}
       <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
-        <div className="bg-pink-600 h-24 relative">
+        <div className="bg-slate-800 h-24 relative">
           <div className="absolute -bottom-10 left-6 bg-white p-2 rounded-full shadow-lg">
 
           </div>
         </div>
         <div className="pt-14 p-6">
           <h3 className="text-2xl font-bold text-slate-900">Teh Pilo</h3>
-          <p className="text-pink-600 font-medium mb-4">Content Creator & Creative</p>
+          <p className="text-blue-600 font-medium mb-4">Content Creator & Creative</p>
           <ul className="space-y-2 text-sm text-slate-600">
-            <li className="flex items-start"><CheckCircle2 className="w-4 h-4 text-emerald-500 mr-2 mt-0.5 shrink-0" /> Wajah dari UrusinLegal di Socmed.</li>
+            <li className="flex items-start"><CheckCircle2 className="w-4 h-4 text-emerald-500 mr-2 mt-0.5 shrink-0" /> Wajah dari UrusinLegal di Sosmed.</li>
             <li className="flex items-start"><CheckCircle2 className="w-4 h-4 text-emerald-500 mr-2 mt-0.5 shrink-0" /> Eksekusi script video (Shooting short video).</li>
             <li className="flex items-start"><CheckCircle2 className="w-4 h-4 text-emerald-500 mr-2 mt-0.5 shrink-0" /> Membawakan materi edukasi & soft selling dengan luwes.</li>
           </ul>
@@ -257,14 +273,14 @@ const TeamRoles = () => (
 
       {/* Admin */}
       <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
-        <div className="bg-amber-500 h-24 relative">
+        <div className="bg-slate-800 h-24 relative">
           <div className="absolute -bottom-10 left-6 bg-white p-2 rounded-full shadow-lg">
 
           </div>
         </div>
         <div className="pt-14 p-6">
           <h3 className="text-2xl font-bold text-slate-900">Bilqis</h3>
-          <p className="text-amber-600 font-medium mb-4">Admin & Operations</p>
+          <p className="text-blue-600 font-medium mb-4">Admin & Operations</p>
           <ul className="space-y-2 text-sm text-slate-600">
             <li className="flex items-start"><CheckCircle2 className="w-4 h-4 text-emerald-500 mr-2 mt-0.5 shrink-0" /> Menangani lead/chat masuk dari Sosmed & Web.</li>
             <li className="flex items-start"><CheckCircle2 className="w-4 h-4 text-emerald-500 mr-2 mt-0.5 shrink-0" /> Eksekusi layanan klien (Pembuatan PT, NIB, dll).</li>
@@ -280,7 +296,7 @@ const ContentStrategy = () => (
   <div className="space-y-8 animate-fade-in">
     <div className="mb-4 border-b pb-4">
       <h2 className="text-3xl font-bold text-slate-900">Panduan Konten & Branding</h2>
-      <p className="text-slate-500 mt-2">Guideline / Manual book untuk Teh Pilo saat produksi konten.</p>
+      <p className="text-slate-500 mt-2">Guideline produksi konten.</p>
     </div>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -419,9 +435,9 @@ const AtmVideoItem = ({ video }) => {
           {/* Custom Play Button Overlay */}
           {!isPlaying && (
             <div className="absolute inset-0 flex items-center justify-center transition-opacity bg-black/10">
-               <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md">
-                 <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-1"></div>
-               </div>
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md">
+                <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-1"></div>
+              </div>
             </div>
           )}
         </div>
