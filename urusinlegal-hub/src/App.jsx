@@ -175,10 +175,10 @@ const Dashboard = () => (
     <div className="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-100 text-center relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-indigo-500 to-emerald-500"></div>
       <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">
-        Kickoff Meeting: <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Sosial Media & SEO</span>
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Sosial Media & SEO</span>
       </h1>
       <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-        Selamat datang di <strong>Central Hub UrusinLegal.com</strong>. Agenda utama kita adalah menyelaraskan strategi konten sosial media dengan optimasi SEO website. Tujuannya satu: mendominasi keyword legalitas usaha dan menghasilkan lead berkualitas tinggi! 🚀
+
       </p>
     </div>
 
