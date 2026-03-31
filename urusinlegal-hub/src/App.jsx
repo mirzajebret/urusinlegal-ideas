@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Users,
   Target,
@@ -163,10 +163,12 @@ export default function App() {
       )}
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-slate-400 py-6 text-center text-sm mt-auto">
-        <p>Internal Document &bull; UrusinLegal.com &bull; {new Date().getFullYear()}</p>
-        <p className="mt-1">Built for Traffic, SEO, and Engagement.</p>
-      </footer>
+      {activeTab !== 'atm' && (
+        <footer className="bg-slate-900 text-slate-400 py-6 text-center text-sm mt-auto">
+          <p>Internal Document &bull; UrusinLegal.com &bull; {new Date().getFullYear()}</p>
+          <p className="mt-1">Built for Traffic, SEO, and Engagement.</p>
+        </footer>
+      )}
     </div>
   );
 }
@@ -336,49 +338,104 @@ const ContentStrategy = () => (
   </div>
 );
 
-const AtmGallery = () => (
-  <div
-    style={{
-      height: 'calc(100dvh - 112px)',
-      overflowY: 'scroll',
-      scrollSnapType: 'y mandatory',
-      scrollBehavior: 'smooth',
-      backgroundColor: '#000',
-    }}
-  >
-    {atmVideos.map((video) => (
-      <div
-        key={video.id}
-        style={{
-          height: 'calc(100dvh - 112px)',
-          scrollSnapAlign: 'start',
-          scrollSnapStop: 'always',
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#000',
-        }}
-      >
-        {video.videoUrl.includes('youtube.com') || video.videoUrl.includes('youtu.be') ? (
-          <iframe
-            style={{ width: '100%', height: '100%', border: 'none' }}
-            src={video.videoUrl}
-            title={video.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        ) : (
+const AtmVideoItem = ({ video }) => {
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.6
+    };
+
+    const handleIntersection = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (videoRef.current) {
+            videoRef.current.play().then(() => setIsPlaying(true)).catch(error => {
+              console.log("Autoplay prevented:", error);
+              setIsPlaying(false);
+            });
+          }
+        } else {
+          if (videoRef.current) {
+            videoRef.current.pause();
+            setIsPlaying(false);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, options);
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => {
+      if (videoRef.current) {
+        observer.unobserve(videoRef.current);
+      }
+    };
+  }, []);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play();
+        setIsPlaying(true);
+      } else {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      }
+    }
+  };
+
+  return (
+    <div
+      className="w-full relative flex items-center justify-center bg-black snap-start snap-always"
+      style={{ height: '100%' }}
+    >
+      {video.videoUrl.includes('youtube.com') || video.videoUrl.includes('youtu.be') ? (
+        <iframe
+          className="w-full h-full border-none"
+          src={video.videoUrl}
+          title={video.title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      ) : (
+        <div className="w-full h-full relative cursor-pointer" onClick={togglePlay}>
           <video
-            style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block' }}
-            controls
+            ref={videoRef}
+            className="w-full h-full object-cover md:object-contain block"
+            loop
             playsInline
             preload="metadata"
           >
             <source src={video.videoUrl} type="video/mp4" />
           </video>
-        )}
-      </div>
+          {/* Custom Play Button Overlay */}
+          {!isPlaying && (
+            <div className="absolute inset-0 flex items-center justify-center transition-opacity bg-black/10">
+               <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md">
+                 <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-1"></div>
+               </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const AtmGallery = () => (
+  <div
+    className="h-[calc(100dvh-116px)] md:h-[calc(100dvh-64px)] overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-black"
+  >
+    {atmVideos.map((video) => (
+      <AtmVideoItem key={video.id} video={video} />
     ))}
   </div>
 );
